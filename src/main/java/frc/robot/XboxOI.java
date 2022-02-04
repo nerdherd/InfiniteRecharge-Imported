@@ -197,7 +197,12 @@ public class XboxOI extends XboxDriverOI {
     }
 
     public double getTriggerAxis(Hand hand) {
-        return super.driverController.getTriggerAxis(hand);
+        if (hand == Hand.kLeft) {
+            return super.driverController.getLeftTriggerAxis();
+        } else if (hand == Hand.kRight) {
+            return super.driverController.getRightTriggerAxis();
+        }
+        return 0.0;
     }
 
     public void setRumble(RumbleType rumbleType, double value) {
