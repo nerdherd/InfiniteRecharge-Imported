@@ -3,7 +3,7 @@ import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
 plugins {
     id "java"
     // id "edu.wpi.first.GradleRIO"
-    id "edu.wpi.first.GradleRIO" version "2022.1.1"
+    id "edu.wpi.first.GradleRIO" version "2022.2.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -69,7 +69,6 @@ dependencies {
     simulationRelease wpi.sim.enableRelease()
 
     testImplementation 'junit:junit:4.12'
-    implementation project(':NerdyLib')
     implementation 'com.github.nerdherd:badlog:bb49ca38f2ea0a201327ba36960695590a97b708'
 }
 
