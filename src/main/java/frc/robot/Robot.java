@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 // import frc.robot.commands.auto.AutoLineIntoTrenchFive;
 // import frc.robot.commands.auto.AutoLineTrenchThree;
 // import frc.robot.commands.auto.BarrelRacing;
-// import frc.robot.commands.auto.BasicAuto;
+import frc.robot.commands.auto.BasicAuto;
 // import frc.robot.commands.auto.BasicAutoNoMove;
 // import frc.robot.commands.auto.Bounce;
 // import frc.robot.commands.auto.BounceBackwards;
@@ -115,11 +115,11 @@ public class Robot extends TimedRobot {
     // jevois.startCameraStream();
     shooter = new Shooter();
     // motor = new SingleMotorMechanism(6, "Motor", true, true);
-    ds = DriverStation.getInstance();
+    // ds = DriverStation.getInstance();
     // climberRatchet = new Piston(6, 9);
     pes = new PressureSensor("name", 2);
     // climberRatchet.setReverse();
-    CameraServer.getInstance().startAutomaticCapture();
+    // CameraServer.getInstance().startAutomaticCapture();
 
     hopper = new Hopper();
     // index = new SingleMotorMechanism(RobotMap.kIndex, "Index", false, false);
@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
 
     //drive.setDefaultCommand(new ArcadeDrive(Robot.drive, Robot.oi)); // Use arcade drive
     drive.setDefaultCommand(new TankDrive(Robot.drive, Robot.oi)); // Use tank drive
-    drive.configKinematics(DriveConstants.kTrackWidth, new Rotation2d(0), new Pose2d(0, 0, new Rotation2d(0)));
+    drive.configKinematics(DriveConstants.kTrackWidth, new Rotation2d(1.596976266), new Pose2d(0, 0, new Rotation2d(1.596976266)));
     NerdyBadlog.initAndLog("/home/lvuser/logs/", "FeedForwardTest", 0.02, shooter, hood, index, hopper, drive);
 
     // m_autonomousCommand = new BasicAuto();

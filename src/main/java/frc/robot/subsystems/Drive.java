@@ -53,17 +53,27 @@ public class Drive extends ShiftingDrivetrain {
 
 
   public Drive() {
-    super(new NerdySparkMax(RobotMap.kLeftMasterTalonID, MotorType.kBrushless),
-     new NerdySparkMax(RobotMap.kRightMasterTalonID, MotorType.kBrushless),
-    new CANMotorController[] {
-      new NerdySparkMax(RobotMap.kLeftFollowerTalon1ID, MotorType.kBrushless),
-    },
-    new CANMotorController[] {
-      new NerdySparkMax(RobotMap.kRightFollowerTalon1ID, MotorType.kBrushless),
-    },
-     true, false, new Piston(RobotMap.  kShifterPort1ID, RobotMap.kShifterPort2ID),
-      DriveConstants.kTrackWidth);
+    // super(new NerdySparkMax(RobotMap.kLeftMasterTalonID, MotorType.kBrushless),
+    //  new NerdySparkMax(RobotMap.kRightMasterTalonID, MotorType.kBrushless),
+    // new CANMotorController[] {
+    //   new NerdySparkMax(RobotMap.kLeftFollowerTalon1ID, MotorType.kBrushless),
+    // },
+    // new CANMotorController[] {
+    //   new NerdySparkMax(RobotMap.kRightFollowerTalon1ID, MotorType.kBrushless),
+    // },
+    //  true, false, new Piston(RobotMap.  kShifterPort1ID, RobotMap.kShifterPort2ID),
+    //   DriveConstants.kTrackWidth);
       
+    super(new NerdyFalcon(RobotMap.kLeftMasterTalonID), 
+    new NerdyFalcon(RobotMap.kRightMasterTalonID), 
+    new CANMotorController[]{
+      new NerdyFalcon(RobotMap.kLeftFollowerTalon1ID),
+    },
+    new CANMotorController[] {
+      new NerdyFalcon(RobotMap.kRightFollowerTalon1ID), 
+    }, true, false, new Piston(RobotMap.kShifterPort1ID, RobotMap.kShifterPort2ID), 
+    DriveConstants.kTrackWidth);
+    
     // (NerdyFalcon) super.m_leftSlaves[0]
     // super.m_rightSlaves[0].followCANMotorController(super.m_rightMaster);
 

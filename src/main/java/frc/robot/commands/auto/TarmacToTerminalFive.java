@@ -40,12 +40,11 @@ import edu.wpi.first.math.geometry.Translation2d;
 
 public class TarmacToTerminalFive extends SequentialCommandGroup {
     
-    private Drivetrain m_drive;
 
     public TarmacToTerminalFive(Drivetrain drive) {
         var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
         new SimpleMotorFeedforward(DriveConstants.kramseteS, DriveConstants.kramseteV, DriveConstants.kramseteA),
-        m_drive.m_kinematics, 
+        drive.m_kinematics, 
         DriveConstants.kRamseteMaxVolts);
 
         var autoCentripetalAccelerationConstraint = new CentripetalAccelerationConstraint(DriveConstants.kMaxCentripetalAcceleration);
@@ -72,59 +71,61 @@ public class TarmacToTerminalFive extends SequentialCommandGroup {
             config);
             
         RamseteCommand driveTarmacToLeftBall = new RamseteCommand(tarmacToLeftBall,
-            m_drive::getPose2d,
+            drive::getPose2d,
             new RamseteController(1.05, 0.14),
             new SimpleMotorFeedforward(DriveConstants.kramseteS, DriveConstants.kramseteV, DriveConstants.kramseteA),
-            m_drive.m_kinematics,
-            m_drive::getCurrentSpeeds,
+            drive.m_kinematics,
+            drive::getCurrentSpeeds,
             new PIDController(DriveConstants.kLeftP, DriveConstants.kLeftI, DriveConstants.kLeftD),
             new PIDController(DriveConstants.kRightP, DriveConstants.kRightI, DriveConstants.kRightD),
-            m_drive::setVoltage, m_drive);
+            drive::setVoltage, drive);
 
         RamseteCommand driveLeftBallToMidBall = new RamseteCommand(leftBallToMidBall,
-            m_drive::getPose2d,
+            drive::getPose2d,
             new RamseteController(1.05, 0.14),
             new SimpleMotorFeedforward(DriveConstants.kramseteS, DriveConstants.kramseteV, DriveConstants.kramseteA),
-            m_drive.m_kinematics,
-            m_drive::getCurrentSpeeds,
+            drive.m_kinematics,
+            drive::getCurrentSpeeds,
             new PIDController(DriveConstants.kLeftP, DriveConstants.kLeftI, DriveConstants.kLeftD),
             new PIDController(DriveConstants.kRightP, DriveConstants.kRightI, DriveConstants.kRightD),
-            m_drive::setVoltage, m_drive);
+            drive::setVoltage, drive);
 
         RamseteCommand driveMidBallToTerminal = new RamseteCommand(midBallToTerminal,
-            m_drive::getPose2d,
+            drive::getPose2d,
             new RamseteController(1.05, 0.14),
             new SimpleMotorFeedforward(DriveConstants.kramseteS, DriveConstants.kramseteV, DriveConstants.kramseteA),
-            m_drive.m_kinematics,
-            m_drive::getCurrentSpeeds,
+            drive.m_kinematics,
+            drive::getCurrentSpeeds,
             new PIDController(DriveConstants.kLeftP, DriveConstants.kLeftI, DriveConstants.kLeftD),
             new PIDController(DriveConstants.kRightP, DriveConstants.kRightI, DriveConstants.kRightD),
-            m_drive::setVoltage, m_drive);
+            drive::setVoltage, drive);
 
         addCommands(
             // Without shooting/intake
-            // driveTarmacToMidBall,
-            // new WaitCommand(3),
-            // driveMidBallToTerminal
+            driveTarmacToLeftBall,
+            new WaitCommand(3),
+            driveLeftBallToMidBall,
+            new WaitCommand(3),
+            driveMidBallToTerminal
 
-            // With shooting/intake
-            new BasicAutoNoMove(), // Robot must face away from basket
-            new ParallelRaceGroup(new IntakeBalls(), driveTarmacToLeftBall),
-            new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
-            new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
-            new ParallelRaceGroup(new ShootBall(), new WaitCommand(5)),
+            // // With shooting/intake
+            // new BasicAutoNoMove(), // Robot must face away from basket
+            // new ParallelRaceGroup(new IntakeBalls(), driveTarmacToLeftBall),
+            // new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
+            // new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
+            // new ParallelRaceGroup(new ShootBall(), new WaitCommand(5)),
 
-            new ParallelRaceGroup(new IntakeBalls(), driveLeftBallToMidBall),
-            new ParallelRaceGroup(new OpenLoopDrive(Robot.drive, -0.2), new WaitCommand(1)),
-            new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
-            new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
-            new ParallelRaceGroup(new ShootBall(), new WaitCommand(5)),
+            // new ParallelRaceGroup(new IntakeBalls(), driveLeftBallToMidBall),
+            // new ParallelRaceGroup(new OpenLoopDrive(Robot.drive, -0.2), new WaitCommand(1)),
+            // new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
+            // new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
+            // new ParallelRaceGroup(new ShootBall(), new WaitCommand(5)),
 
-            new ParallelRaceGroup(new IntakeBalls(), driveMidBallToTerminal),
-            new ParallelRaceGroup(new OpenLoopDrive(Robot.drive, -0.2), new WaitCommand(1)),
-            new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
-            new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
-            new ParallelRaceGroup(new ShootBall(), new WaitCommand(5))
+            // new ParallelRaceGroup(new IntakeBalls(), driveMidBallToTerminal),
+            // new ParallelRaceGroup(new OpenLoopDrive(Robot.drive, -0.2), new WaitCommand(1)),
+            // new MoveToAngleLime(VisionConstants.kRotP_lime, VisionConstants.kVecP_lime),
+            // new ParallelCommandGroup(new InstantCommand(() -> Robot.hood.setAngle(45))),
+            // new ParallelRaceGroup(new ShootBall(), new WaitCommand(5))
         );
 
     }

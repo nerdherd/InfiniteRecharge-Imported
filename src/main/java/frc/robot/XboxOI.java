@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.nerdherd.lib.drivetrain.auto.DriveDistanceMotionMagic;
 import com.nerdherd.lib.drivetrain.auto.DriveStraightContinuous;
+import com.nerdherd.lib.drivetrain.auto.DriveTime;
 import com.nerdherd.lib.drivetrain.auto.ResetDriveEncoders;
 import com.nerdherd.lib.drivetrain.auto.ResetGyro;
 import com.nerdherd.lib.drivetrain.characterization.DriveCharacterizationTest;
@@ -202,7 +203,8 @@ public class XboxOI extends XboxDriverOI {
         
         SmartDashboard.putData("Basic Auto", new BasicAuto());
         SmartDashboard.putData("Basic Auto No Move", new BasicAutoNoMove());
-        //SmartDashboard.putData("TarmacToTerminalFive", new TarmacToTerminalFive(Robot.drive));
+        SmartDashboard.putData("TestDriveTime", new DriveTime(Robot.drive, 0.2, 1));
+        SmartDashboard.putData("TarmacToTerminalFive", new TarmacToTerminalFive(Robot.drive));
         //SmartDashboard.putData("TarmacToTerminalThree", new TarmacToTerminalThree(Robot.drive));
         SmartDashboard.putData("Test Flywheel", new TestFlywheel(Robot.drive));
     }
