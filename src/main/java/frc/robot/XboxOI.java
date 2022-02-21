@@ -5,6 +5,7 @@ import com.nerdherd.lib.drivetrain.auto.DriveStraightContinuous;
 import com.nerdherd.lib.drivetrain.auto.ResetDriveEncoders;
 import com.nerdherd.lib.drivetrain.auto.ResetGyro;
 import com.nerdherd.lib.drivetrain.characterization.DriveCharacterizationTest;
+import com.nerdherd.lib.drivetrain.experimental.Drivetrain;
 import com.nerdherd.lib.drivetrain.shifting.ShiftHigh;
 import com.nerdherd.lib.drivetrain.shifting.ShiftLow;
 import com.nerdherd.lib.motor.commands.ResetSingleMotorEncoder;
@@ -30,6 +31,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.InGameResetHood;
+import frc.robot.commands.auto.BasicAuto;
+import frc.robot.commands.auto.BasicAutoNoMove;
+import frc.robot.commands.auto.TarmacToTerminalFive;
+import frc.robot.commands.auto.TarmacToTerminalThree;
+import frc.robot.commands.auto.TestFlywheel;
+// import frc.robot.commands.InGameResetHood;
 // import frc.robot.commands.auto.AutoLineIntoTrench;
 // import frc.robot.commands.auto.BarrelRacing;
 // import frc.robot.commands.auto.Bounce;
@@ -68,6 +75,7 @@ import frc.robot.commands.shooting.WallShot;
 import frc.robot.commands.vision.DistanceToAngle;
 import frc.robot.commands.vision.TurnToAngleLime;
 import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer.IndexerState;
 
 /**
@@ -90,6 +98,7 @@ public class XboxOI extends XboxDriverOI {
 
     public XboxOI(double deadband) {
         super(deadband);
+
         intake_1 = new JoystickButton(super.operatorJoy, 1);
         startShooting_2 = new JoystickButton(super.operatorJoy, 2);
         startShootingOld_3 = new JoystickButton(super.operatorJoy, 3);
@@ -190,6 +199,12 @@ public class XboxOI extends XboxDriverOI {
         // SmartDashboard.putData("Test Ramsete", new TestRamsete(Robot.drive));
         // SmartDashboard.putData("Test Ramsete Turn", new TestRamseteTurn(Robot.drive));
         SmartDashboard.putData("InGameResetEncoders", new InGameResetHood());
+        
+        SmartDashboard.putData("Basic Auto", new BasicAuto());
+        SmartDashboard.putData("Basic Auto No Move", new BasicAutoNoMove());
+        //SmartDashboard.putData("TarmacToTerminalFive", new TarmacToTerminalFive(Robot.drive));
+        //SmartDashboard.putData("TarmacToTerminalThree", new TarmacToTerminalThree(Robot.drive));
+        SmartDashboard.putData("Test Flywheel", new TestFlywheel(Robot.drive));
     }
 
     public boolean getRawButton(int n) {

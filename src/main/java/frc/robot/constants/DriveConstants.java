@@ -67,6 +67,10 @@ public class DriveConstants {
 
     public static double kTrackWidth = 0.678;
 	public static final double kMaxCentripetalAcceleration = 2.1;
+
+    public static final double kWallOffset = 0.3048;
+
+    public static final double kTarmacToBallOneAngle = 1.257627;
     
     public static final double kVLinear = 0.461;
     public static final double kALinear = 0.0767;

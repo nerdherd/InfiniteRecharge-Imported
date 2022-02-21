@@ -5,6 +5,7 @@ import com.nerdherd.lib.drivetrain.auto.DriveStraightContinuous;
 import com.nerdherd.lib.drivetrain.auto.ResetDriveEncoders;
 import com.nerdherd.lib.drivetrain.auto.ResetGyro;
 import com.nerdherd.lib.drivetrain.characterization.DriveCharacterizationTest;
+import com.nerdherd.lib.drivetrain.experimental.Drivetrain;
 import com.nerdherd.lib.drivetrain.shifting.ShiftHigh;
 import com.nerdherd.lib.drivetrain.shifting.ShiftLow;
 import com.nerdherd.lib.motor.commands.ResetSingleMotorEncoder;
@@ -65,7 +66,14 @@ import frc.robot.commands.shooting.WallShot;
 import frc.robot.commands.vision.DistanceToAngle;
 import frc.robot.commands.vision.TurnToAngleLime;
 import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer.IndexerState;
+
+import frc.robot.commands.auto.BasicAuto;
+import frc.robot.commands.auto.BasicAutoNoMove;
+import frc.robot.commands.auto.TarmacToTerminalFive;
+import frc.robot.commands.auto.TarmacToTerminalThree;
+import frc.robot.commands.auto.TestFlywheel;
 
 /**
  * Add your docs here.
@@ -81,6 +89,12 @@ public class OI extends DefaultOI {
 
     public OI() {
         super();
+        SmartDashboard.putData("Basic Auto", new BasicAuto());
+        SmartDashboard.putData("Basic Auto No Move", new BasicAutoNoMove());
+        SmartDashboard.putData("Tarmac To Terminal Five", new TarmacToTerminalFive(Robot.drive));
+        SmartDashboard.putData("Tarmac to Terminal Three", new TarmacToTerminalThree(Robot.drive));
+        SmartDashboard.putData("Test Flywheel", new TestFlywheel(Robot.drive));
+
         ploughIntake_2 = new JoystickButton(super.driveJoyLeft, 2); // Check in with Drivers
         shiftHigh_6L = new JoystickButton(super.driveJoyLeft, 6);
         shiftLow_6R = new JoystickButton(super.driveJoyRight, 6);
