@@ -18,6 +18,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 // import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -45,6 +47,7 @@ public class Drive extends ShiftingDrivetrain {
    * Creates a new Drive.
    */
   private DifferentialDrivetrainSim m_driveSim;
+  public Compressor compressor;
   // private AnalogGyroSim m_gyroSim;
   private SimDevice m_gyroSim;
   // private EncoderSim m_leftEncoderSim;
@@ -99,6 +102,7 @@ public class Drive extends ShiftingDrivetrain {
      super.m_leftSlaves[0].configCurrentLimitPeak(50);
      super.m_rightSlaves[0].configCurrentLimitPeak(50);
      setCoastMode();
+     compressor = new Compressor(3, PneumaticsModuleType.CTREPCM);
      
     //  m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse)
     //  m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse)

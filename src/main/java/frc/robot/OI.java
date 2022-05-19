@@ -72,7 +72,7 @@ import frc.robot.subsystems.Indexer.IndexerState;
 import frc.robot.commands.auto.BasicAuto;
 import frc.robot.commands.auto.BasicAutoNoMove;
 import frc.robot.commands.auto.TarmacToTerminalFive;
-import frc.robot.commands.auto.TarmacToTerminalThree;
+// import frc.robot.commands.auto.TarmacToTerminalThree;
 import frc.robot.commands.auto.TestFlywheel;
 
 /**
@@ -88,11 +88,12 @@ public class OI extends DefaultOI {
     // climberExtend_5, climberRetract_6
 
     public OI() {
+        // Need to add super()
         super();
         SmartDashboard.putData("Basic Auto", new BasicAuto());
         SmartDashboard.putData("Basic Auto No Move", new BasicAutoNoMove());
         SmartDashboard.putData("Tarmac To Terminal Five", new TarmacToTerminalFive(Robot.drive));
-        SmartDashboard.putData("Tarmac to Terminal Three", new TarmacToTerminalThree(Robot.drive));
+        // SmartDashboard.putData("Tarmac to Terminal Three", new TarmacToTerminalThree(Robot.drive));
         SmartDashboard.putData("Test Flywheel", new TestFlywheel(Robot.drive));
 
         ploughIntake_2 = new JoystickButton(super.driveJoyLeft, 2); // Check in with Drivers

@@ -35,7 +35,7 @@ import frc.robot.commands.InGameResetHood;
 import frc.robot.commands.auto.BasicAuto;
 import frc.robot.commands.auto.BasicAutoNoMove;
 import frc.robot.commands.auto.TarmacToTerminalFive;
-import frc.robot.commands.auto.TarmacToTerminalThree;
+// import frc.robot.commands.auto.TarmacToTerminalThree;
 import frc.robot.commands.auto.TestFlywheel;
 // import frc.robot.commands.InGameResetHood;
 // import frc.robot.commands.auto.AutoLineIntoTrench;

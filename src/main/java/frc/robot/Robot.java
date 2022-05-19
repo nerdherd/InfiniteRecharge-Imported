@@ -21,6 +21,7 @@ import com.nerdherd.lib.oi.XboxDriverOI;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.TimedRobot;
 import com.nerdherd.lib.oi.controllers.NerdyXboxController.Hand;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -89,8 +90,9 @@ public class Robot extends TimedRobot {
   public static SingleMotorMechanism panelRot;
   // public static Climber climber;
   public static Limelight limelight;
-  // public static OI oi;
-  public static XboxOI oi;
+  public static OI oi;
+  // public static XboxOI oi;
+  // public static PS4OI oi;
   public static ResetSingleMotorEncoder hoodReset;
   public static SendableChooser<Command> autoChooser;
   // public static SendableChooser<Command> oiChooser;
@@ -134,13 +136,16 @@ public class Robot extends TimedRobot {
 
     // climberReset = new ParallelCommandGroup( ));
 
-    // oi = new OI(); // Standard OI
-    oi = new XboxOI(0.2); // Xbox OI
+    oi = new OI(); // Standard OI
+    // oi = new XboxOI(0.2); // Xbox OI
+    // oi = new PS4OI();
 
-    //drive.setDefaultCommand(new ArcadeDrive(Robot.drive, Robot.oi)); // Use arcade drive
-    drive.setDefaultCommand(new TankDrive(Robot.drive, Robot.oi)); // Use tank drive
+    drive.setDefaultCommand(new ArcadeDrive(Robot.drive, Robot.oi)); // Use arcade drive
+    // drive.setDefaultCommand(new TankDrive(Robot.drive, Robot.oi)); // Use tank drive
     drive.configKinematics(DriveConstants.kTrackWidth, new Rotation2d(1.596976266), new Pose2d(0, 0, new Rotation2d(1.596976266)));
     NerdyBadlog.initAndLog("/home/lvuser/logs/", "FeedForwardTest", 0.02, shooter, hood, index, hopper, drive);
+
+    drive.compressor.enableDigital();
 
     // m_autonomousCommand = new BasicAuto();
     autoChooser = new SendableChooser<Command>();
@@ -242,8 +247,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    // drive.setCoastMode();
-    oi.configJoystickDeadband(SmartDashboard.getNumber("deadband", oi.getJoystickDeadband()));
+    drive.setCoastMode();
+    // oi.configJoystickDeadband(SmartDashboard.getNumber("deadband", oi.getJoystickDeadband()));
   }
 
   @Override
