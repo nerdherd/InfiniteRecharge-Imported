@@ -16,6 +16,8 @@ import com.nerdherd.lib.pneumatics.Piston;
 import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 // import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -48,6 +50,8 @@ public class Drive extends ShiftingDrivetrain {
   // private EncoderSim m_leftEncoderSim;
   // private EncoderSim m_rightEncoderSim;
   private Field2d m_field;
+  
+  public Compressor compressor;
 
 
   public Drive() {
@@ -87,6 +91,9 @@ public class Drive extends ShiftingDrivetrain {
      super.m_leftSlaves[0].configCurrentLimitPeak(50);
      super.m_rightSlaves[0].configCurrentLimitPeak(50);
      setCoastMode();
+
+     
+     compressor = new Compressor(3, PneumaticsModuleType.CTREPCM);
      
     //  m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse)
     //  m_leftEncoder.setDistancePerPulse(Constants.DriveConstants.kEncoderDistancePerPulse)
